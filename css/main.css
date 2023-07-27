@@ -1,0 +1,71 @@
+@font-face {
+    font-family: sans;
+    src: url(./comic.ttf);
+  }
+
+@keyframes fadeInAnimation {
+    0% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+*,
+*::before,
+*::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: sans;
+}
+
+body {
+    background-image: url("./competitive-shitting-shitting.gif");
+    animation: fadeInAnimation ease 3s;
+    animation-iteration-count: 1;
+    animation-fill-mode: forwards;
+}
+
+h1 {
+    text-align: center;
+    padding: 2em;
+    font-size: 2.5em;
+}
+
+.wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+li {
+    padding-bottom: 1em;
+    list-style: none;
+}
+
+.input {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+button {
+    border-radius: .5em;
+    padding: .2em;
+}
+
+#addButt {
+    margin: 1em;
+    border-radius: .5em;
+    padding: .5em;
+
+}
+
+button:hover {
+    background-color: #95afc0;
+    transition: .5s;
+}
