@@ -4,14 +4,13 @@
   }
 
 @keyframes fadeInAnimation {
-    0% {
+    from {
         opacity: 0;
+        transform: translateY(50%);
     }
-
-    100% {
-        opacity: 1;
-    }
+    to { opacity: 1 }
 }
+
 
 *,
 *::before,
@@ -24,7 +23,7 @@
 
 body {
     background-image: url("./competitive-shitting-shitting.gif");
-    animation: fadeInAnimation ease 3s;
+    animation: fadeInAnimation ease 1.3s;
     animation-iteration-count: 1;
     animation-fill-mode: forwards;
 }
@@ -39,6 +38,7 @@ h1 {
     display: flex;
     justify-content: center;
     align-items: center;
+    border: none;
 }
 
 
@@ -62,8 +62,16 @@ button {
     margin: 1em;
     border-radius: .5em;
     padding: .5em;
-
 }
+
+#newTodo {
+    border: dashed 1px;
+}
+
+#newTodo:focus{
+    outline: 0;
+    box-shadow: none;
+   }
 
 button:hover {
     background-color: #95afc0;
