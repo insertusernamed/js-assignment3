@@ -1,14 +1,32 @@
-@font-face {
-    font-family: sans;
-    src: url(./comic.ttf);
-  }
+@import url('https://fonts.googleapis.com/css2?family=Edu+SA+Beginner&display=swap');
 
 @keyframes fadeInAnimation {
     from {
         opacity: 0;
         transform: translateY(50%);
     }
-    to { opacity: 1 }
+
+    to {
+        opacity: 1
+    }
+}
+
+@keyframes fadeOut {
+    from {
+        opacity: 1;
+    }
+
+    to {
+        opacity: 0;
+    }
+}
+
+/* Removing the default contenteditable styles when editing h1 */
+h1[contenteditable="true"] {
+    outline: none;
+    border: none;
+    padding: 1em;
+    width: 100%;
 }
 
 
@@ -28,8 +46,8 @@ body {
 }
 
 h1 {
+    font-family: 'Edu SA Beginner', cursive;
     text-align: center;
-    padding: 1em;
     font-size: 2.7vw;
 }
 
@@ -58,6 +76,33 @@ button {
     padding: .2em;
 }
 
+button:hover {
+    background-color: #95afc0;
+    transition: .5s;
+}
+
+button.delete-btn {
+    background-color: #e74c3c;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    padding: 8px 12px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button.delete-btn:hover {
+    background-color: #c0392b;
+}
+
+button.delete-btn.confirm {
+    background-color: #f39c12;
+}
+
+button.delete-btn.confirm:hover {
+    background-color: #d68910;
+}
+
 #addButt {
     margin: 1em;
     border-radius: .5em;
@@ -68,31 +113,39 @@ button {
 
 #newTodo {
     border: none;
-    width: 200px;
+    width: 30%;
     transition: width 0.3s ease;
 }
 
-#newTodo:focus{
+#newTodo:focus {
     outline: 0;
     box-shadow: none;
-   }
+}
 
-button:hover {
-    background-color: #95afc0;
-    transition: .5s;
+.todo-item {
+    animation: fadeInAnimation 0.5s ease;
+}
+
+.deleting {
+    animation: fadeOut 0.3s ease;
+    animation-fill-mode: forwards;
 }
 
 @media screen and (max-width: 768px) {
     .input {
-        flex-direction: column; /* Stack the elements vertically on smaller screens */
+        flex-direction: column;
+        /* Stack the elements vertically on smaller screens */
     }
 
     #addButt {
-        width: 90%; /* Make the button take the full width of the parent on smaller screens */
+        width: 90%;
+        /* Make the button take the full width of the parent on smaller screens */
     }
 
     #newTodo {
-        width: 90%; /* Make the input take the full width of the parent on smaller screens */
-        margin-bottom: 1em; /* Add some spacing between the input and the button */
+        width: 90%;
+        /* Make the input take the full width of the parent on smaller screens */
+        margin-bottom: 1em;
+        /* Add some spacing between the input and the button */
     }
 }

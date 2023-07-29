@@ -1,3 +1,9 @@
+/*
+Daniel Yevtushenko - 200528781
+Jenna Deamer - 200529678
+*/
+
+//--------------------------// Local storage functions //--------------------------//
 // Function to save the todo list to localStorage
 function saveTodoList() {
   const todoList = document.getElementById('todoList').innerHTML;
@@ -23,46 +29,63 @@ function loadTodoList() {
 }
 
 // Load the todo list from localStorage when the page loads
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
   loadTodoList();
 });
 
 function addTodo() {
-    const todoText = document.getElementById('newTodo').value;
-    if (!todoText) return;
+  const todoText = document.getElementById('newTodo').value;
+  if (!todoText) return;
 
-    const todoList = document.getElementById('todoList');
-    const todoItem = document.createElement('li');
-    todoItem.className = 'todo-item';
-    todoItem.innerHTML = `
+  const todoList = document.getElementById('todoList');
+  const todoItem = document.createElement('li');
+  todoItem.className = 'todo-item';
+  todoItem.innerHTML = `
       <input type="checkbox" onchange="toggleCompleted(this)">
       <span>${todoText}</span>
-      <button onclick="deleteTodo(this)">Delete</button>
+      <button onclick="deleteTodo(this)" class="delete-btn">Delete</button>
     `;
-    todoList.appendChild(todoItem);
-    document.getElementById('newTodo').value = '';
+  todoList.appendChild(todoItem);
+  document.getElementById('newTodo').value = '';
 
-    saveTodoList();
+  saveTodoList();
 }
 
 function toggleCompleted(checkbox) {
-    const todoText = checkbox.nextElementSibling; 
-    if (checkbox.checked) {
-      todoText.classList.add('completed');
-      checkbox.parentNode.style.order = 1;
-    } else {
-      todoText.classList.remove('completed');
-      checkbox.parentNode.style.order = 0;
-    }
+  const todoText = checkbox.nextElementSibling;
+  if (checkbox.checked) {
+    todoText.classList.add('completed');
+    checkbox.parentNode.style.order = 1;
+  } else {
+    todoText.classList.remove('completed');
+    checkbox.parentNode.style.order = 0;
   }
+}
 
 function deleteTodo(button) {
-    const todoItem = button.parentNode;
-    const todoList = document.getElementById('todoList');
-    todoList.removeChild(todoItem);
+  const todoItem = button.parentNode;
 
-    saveTodoList();
+  if (!todoItem.classList.contains('confirm')) {
+    // First click, change the button text to "Confirm?"
+    button.textContent = 'Confirm?';
+    todoItem.classList.add('confirm');
+  } else {
+    // Second click, proceed with deletion
+    const todoList = document.getElementById('todoList');
+
+    // Add the 'deleting' class to initiate the fade-out animation
+    todoItem.classList.add('deleting');
+
+    // After the animation finishes, remove the todo item from the list
+    todoItem.addEventListener('animationend', function () {
+      todoList.removeChild(todoItem);
+
+      // Save the updated todo list to localStorage
+      saveTodoList();
+    });
+  }
 }
+
 
 function toggleTitleStyle() {
   const h1Element = document.querySelector('h1');
@@ -75,9 +98,9 @@ function toggleTitleStyle() {
   saveTodoList();
 }
 
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
   const h1Element = document.querySelector('h1');
-  
+
   // Add event listener to the <h1> element to handle focus and blur
   h1Element.addEventListener('focus', function () {
     if (h1Element.textContent.trim() === 'Untitled To-Do List') {
