@@ -22,7 +22,6 @@
 }
 
 body {
-    background-image: url("./competitive-shitting-shitting.gif");
     animation: fadeInAnimation ease 1.3s;
     animation-iteration-count: 1;
     animation-fill-mode: forwards;
@@ -30,8 +29,8 @@ body {
 
 h1 {
     text-align: center;
-    padding: 2em;
-    font-size: 2.5em;
+    padding: 1em;
+    font-size: 2.7vw;
 }
 
 .wrapper {
@@ -51,6 +50,7 @@ li {
     display: flex;
     justify-content: center;
     align-items: center;
+    transition: width 0.3s ease;
 }
 
 button {
@@ -62,10 +62,14 @@ button {
     margin: 1em;
     border-radius: .5em;
     padding: .5em;
+    width: 100px;
+    transition: width 0.3s ease;
 }
 
 #newTodo {
-    border: dashed 1px;
+    border: none;
+    width: 200px;
+    transition: width 0.3s ease;
 }
 
 #newTodo:focus{
@@ -76,4 +80,19 @@ button {
 button:hover {
     background-color: #95afc0;
     transition: .5s;
+}
+
+@media screen and (max-width: 768px) {
+    .input {
+        flex-direction: column; /* Stack the elements vertically on smaller screens */
+    }
+
+    #addButt {
+        width: 90%; /* Make the button take the full width of the parent on smaller screens */
+    }
+
+    #newTodo {
+        width: 90%; /* Make the input take the full width of the parent on smaller screens */
+        margin-bottom: 1em; /* Add some spacing between the input and the button */
+    }
 }
