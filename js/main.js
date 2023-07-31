@@ -29,8 +29,21 @@ function loadTodoList() {
 }
 
 // Load the todo list from localStorage when the page loads
-document.addEventListener('DOMContentLoaded', function () {
+document.addEventListener('DOMContentLoaded', function() {
   loadTodoList();
+
+  // Add event listener for "input" event on the title to handle multiline prevention
+  const titleElement = document.querySelector('h1[contenteditable="true"]');
+  titleElement.addEventListener('input', function(event) {
+    // Replace any newline characters with an empty string to prevent multiline
+    this.textContent = this.textContent.replace(/\n/g, '');
+  });
+
+  // Add event listener for "blur" event on the title to remove focus and selection
+  titleElement.addEventListener('blur', function(event) {
+    window.getSelection().removeAllRanges(); // Remove text selection highlight
+    this.blur(); // Remove focus from the title element
+  });
 });
 
 function addTodo() {
