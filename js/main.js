@@ -100,16 +100,16 @@ function deleteTodo(button) {
 }
 
 
-function toggleTitleStyle() {
-  const h1Element = document.querySelector('h1');
-  if (h1Element.textContent.trim() === 'Untitled To-Do List') {
-    h1Element.style.fontStyle = 'italic';
-  } else {
-    h1Element.style.fontStyle = 'normal';
-  }
+// function toggleTitleStyle() {
+//   const h1Element = document.querySelector('h1');
+//   if (h1Element.textContent.trim() === 'Untitled To-Do List') {
+//     h1Element.style.fontStyle = 'italic';
+//   } else {
+//     h1Element.style.fontStyle = 'normal';
+//   }
 
-  saveTodoList();
-}
+//   saveTodoList();
+// }
 
 document.addEventListener('DOMContentLoaded', function () {
   const h1Element = document.querySelector('h1');
