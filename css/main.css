@@ -27,6 +27,9 @@ h1[contenteditable="true"] {
     border: none;
     padding: 1em;
     width: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-align: center;
 }
 
 
@@ -36,7 +39,6 @@ h1[contenteditable="true"] {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: sans;
 }
 
 body {
@@ -47,7 +49,6 @@ body {
 
 h1 {
     font-family: 'Scope One', serif;
-    text-align: center;
     font-size: 2.7vw;
 }
 
@@ -69,6 +70,10 @@ li {
     justify-content: center;
     align-items: center;
     transition: width 0.3s ease;
+}
+
+.completed {
+    text-decoration: line-through;
 }
 
 button {
@@ -115,6 +120,9 @@ button.delete-btn.confirm:hover {
     border: none;
     width: 30%;
     transition: width 0.3s ease;
+    max-width: 30%;
+    word-wrap: break-word;
+    hyphens: auto;
 }
 
 #newTodo:focus {
@@ -124,6 +132,13 @@ button.delete-btn.confirm:hover {
 
 .todo-item {
     animation: fadeInAnimation 0.5s ease;
+}
+
+.todo-item span {
+    display: inline-block;
+    width: 500px;
+    word-wrap: break-word;
+    hyphens: auto;
 }
 
 .deleting {
