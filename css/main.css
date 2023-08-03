@@ -73,6 +73,7 @@ li {
 }
 
 .completed {
+    color: rgb(55, 189, 55);
     text-decoration: line-through;
 }
 
@@ -142,6 +143,7 @@ button.delete-btn.confirm:hover {
 }
 
 .deleting {
+    color: rgb(252, 84, 84);
     animation: fadeOut 0.3s ease;
     animation-fill-mode: forwards;
 }

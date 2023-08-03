@@ -29,18 +29,18 @@ function loadTodoList() {
 }
 
 // Load the todo list from localStorage when the page loads
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
   loadTodoList();
 
   // Add event listener for "input" event on the title to handle multiline prevention
   const titleElement = document.querySelector('h1[contenteditable="true"]');
-  titleElement.addEventListener('input', function(event) {
+  titleElement.addEventListener('input', function (event) {
     // Replace any newline characters with an empty string to prevent multiline
     this.textContent = this.textContent.replace(/\n/g, '');
   });
 
   // Add event listener for "blur" event on the title to remove focus and selection
-  titleElement.addEventListener('blur', function(event) {
+  titleElement.addEventListener('blur', function (event) {
     window.getSelection().removeAllRanges(); // Remove text selection highlight
     this.blur(); // Remove focus from the title element
   });
@@ -65,15 +65,27 @@ function addTodo() {
 }
 
 function toggleCompleted(checkbox) {
-  const todoText = checkbox.nextElementSibling;
+  const listItem = checkbox.closest('li');
+  const ul = listItem.parentNode;
+
   if (checkbox.checked) {
-    todoText.classList.add('completed');
-    checkbox.parentNode.style.order = 1;
+    listItem.querySelector('span').classList.add('completed');
+    ul.appendChild(listItem);  // Move checked item to the bottom
   } else {
-    todoText.classList.remove('completed');
-    checkbox.parentNode.style.order = 0;
+    listItem.querySelector('span').classList.remove('completed');
+    ul.insertBefore(listItem, ul.firstChild);  // Move unchecked item to the top
   }
 }
+
+// Add event listener for checkbox change event
+document.addEventListener('change', function (event) {
+  const checkbox = event.target;
+  if (checkbox.type === 'checkbox') {
+    const id = checkbox.parentNode.id;
+    checkboxStates[id] = checkbox.checked;
+    saveTodoList();
+  }
+});
 
 function deleteTodo(button) {
   const todoItem = button.parentNode;
@@ -99,7 +111,7 @@ function deleteTodo(button) {
   }
 }
 
-
+// idk why but this makes the h1 text write from right to left??? who needs italics anyway
 // function toggleTitleStyle() {
 //   const h1Element = document.querySelector('h1');
 //   if (h1Element.textContent.trim() === 'Untitled To-Do List') {
