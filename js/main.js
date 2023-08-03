@@ -20,7 +20,10 @@ function loadTodoList() {
     const title = localStorage.getItem("title");
 
     if (todoList) {
+        // add everything thats saved back
         document.getElementById("todoList").innerHTML = todoList;
+
+        // reapply checkbox checked status
         const checkboxes = document.querySelectorAll('input[type="checkbox"]');
         checkboxes.forEach(function (checkbox) {
             const listItem = checkbox.nextElementSibling;
@@ -28,6 +31,8 @@ function loadTodoList() {
                 checkbox.checked = !checkbox.checked;
             }
         });
+
+        // sort the list by completed status
     }
 
     if (title) {
