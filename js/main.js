@@ -85,9 +85,13 @@ function toggleCompleted(checkbox) {
     if (checkbox.checked) {
         listItem.querySelector("span").classList.add("completed");
         ul.appendChild(listItem); // Move checked item to the bottom
+        var dingydingsound = new Audio('js/ding.mp3');
+        dingydingsound.play();
     } else {
         listItem.querySelector("span").classList.remove("completed");
         ul.insertBefore(listItem, ul.firstChild); // Move unchecked item to the top
+        var dingydingsound = new Audio('js/dong.mp3');
+        dingydingsound.play();
     }
     saveTodoList();
 }
