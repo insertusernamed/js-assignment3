@@ -3,6 +3,8 @@ Daniel Yevtushenko - 200528781
 Jenna Deamer - 200529678
 */
 
+var count = 0;
+
 //--------------------------// Local storage functions //--------------------------//
 // Function to save the todo list to localStorage
 function saveTodoList() {
@@ -12,12 +14,14 @@ function saveTodoList() {
 
     localStorage.setItem("todoList", todoList);
     localStorage.setItem("title", title);
+    localStorage.setItem("counter", count)
 }
 
 // Function to load the todo list from localStorage
 function loadTodoList() {
     const todoList = localStorage.getItem("todoList");
     const title = localStorage.getItem("title");
+    count = localStorage.getItem("count");
 
     if (todoList) {
         // add everything thats saved back
@@ -31,14 +35,17 @@ function loadTodoList() {
                 checkbox.checked = !checkbox.checked;
             }
         });
-
-        // sort the list by completed status
     }
 
     if (title) {
         document.querySelector("h1").textContent = title;
         //toggleTitleStyle(); // Apply italic style if needed
     }
+
+    const allElements = document.querySelectorAll('*');
+    allElements.forEach(element => {
+        element.classList.remove('deep-fried');
+    });
 }
 
 // Load the todo list from localStorage when the page loads
@@ -66,6 +73,7 @@ function addTodo() {
 
     const todoList = document.getElementById("todoList");
     const todoItem = document.createElement("li");
+    todoItem.setAttribute("counter", count);
     todoItem.className = "todo-item";
     todoItem.innerHTML = `
       <input type="checkbox" onchange="toggleCompleted(this)">
@@ -73,6 +81,7 @@ function addTodo() {
       <button onclick="deleteTodo(this)" class="delete-btn">Delete</button>
     `;
     todoList.appendChild(todoItem);
+    count++;
     document.getElementById("newTodo").value = "";
 
     saveTodoList();
@@ -85,13 +94,15 @@ function toggleCompleted(checkbox) {
     if (checkbox.checked) {
         listItem.querySelector("span").classList.add("completed");
         ul.appendChild(listItem); // Move checked item to the bottom
-        var dingydingsound = new Audio('js/ding.mp3');
-        dingydingsound.play();
+        var itemCheckedSound = new Audio('js/ding.mp3');
+        itemCheckedSound.volume = 0.2;
+        itemCheckedSound.play();
     } else {
         listItem.querySelector("span").classList.remove("completed");
         ul.insertBefore(listItem, ul.firstChild); // Move unchecked item to the top
-        var dingydingsound = new Audio('js/dong.mp3');
-        dingydingsound.play();
+        var itemUncheckedSound = new Audio('js/dong.mp3');
+        itemUncheckedSound.volume = 0.2;
+        itemUncheckedSound.play();
     }
     saveTodoList();
 }
@@ -109,6 +120,13 @@ function deleteTodo(button) {
 
         // Add the 'deleting' class to initiate the fade-out animation
         todoItem.classList.add("deleting");
+        var itemUncheckedSound = new Audio('js/delete.mp3');
+        itemUncheckedSound.volume = 0.2;
+        itemUncheckedSound.play();
+        const allElements = document.querySelectorAll('*');
+        allElements.forEach(element => {
+            element.classList.add('deep-fried');
+        });
 
         // After the animation finishes, remove the todo item from the list
         todoItem.addEventListener("animationend", function () {

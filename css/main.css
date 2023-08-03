@@ -21,6 +21,25 @@
     }
 }
 
+@keyframes deepFryAnimation {
+    0% {
+        transform: skew(0deg) rotate(0deg);
+        background-color: transparent;
+        filter: none;
+        text-shadow: none;
+    }
+    100% {
+        transform: skew(10deg) rotate(5deg);
+        background-color: #ff9933;
+        filter: contrast(200%) saturate(200%) hue-rotate(90deg);
+        text-shadow: 3px 3px 5px rgba(0, 0, 0, 0.5);
+    }
+}
+
+.deep-fried {
+    animation: deepFryAnimation 55s linear;
+}
+
 /* Removing the default contenteditable styles when editing h1 */
 h1[contenteditable="true"] {
     outline: none;
@@ -45,6 +64,9 @@ body {
     animation: fadeInAnimation ease 1.3s;
     animation-iteration-count: 1;
     animation-fill-mode: forwards;
+    background: rgb(2, 0, 36);
+    background-image: radial-gradient(circle at 34% 75%, rgba(142, 142, 142,0.06) 0%, rgba(142, 142, 142,0.06) 50%,rgba(11, 11, 11,0.06) 50%, rgba(11, 11, 11,0.06) 100%),radial-gradient(circle at 40% 51%, rgba(12, 12, 12,0.06) 0%, rgba(12, 12, 12,0.06) 50%,rgba(242, 242, 242,0.06) 50%, rgba(242, 242, 242,0.06) 100%),radial-gradient(circle at 50% 87%, rgba(189, 189, 189,0.06) 0%, rgba(189, 189, 189,0.06) 50%,rgba(0, 0, 0,0.06) 50%, rgba(0, 0, 0,0.06) 100%),linear-gradient(90deg, hsl(35,0%,96%),hsl(35,0%,96%));
+    height: 100vh;
 }
 
 h1 {
@@ -63,7 +85,9 @@ h1 {
 li {
     padding-bottom: 1em;
     list-style: none;
+
 }
+
 
 .input {
     display: flex;
@@ -102,11 +126,11 @@ button.delete-btn:hover {
 }
 
 button.delete-btn.confirm {
-    background-color: #f39c12;
+    background-color: #ff331d;
 }
 
 button.delete-btn.confirm:hover {
-    background-color: #d68910;
+    background-color: #ff331d;
 }
 
 #addButt {
@@ -124,6 +148,8 @@ button.delete-btn.confirm:hover {
     max-width: 30%;
     word-wrap: break-word;
     hyphens: auto;
+    padding: 10px;
+    border-radius: 5px;
 }
 
 #newTodo:focus {
@@ -133,6 +159,10 @@ button.delete-btn.confirm:hover {
 
 .todo-item {
     animation: fadeInAnimation 0.5s ease;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
 }
 
 .todo-item span {
