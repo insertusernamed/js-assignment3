@@ -14,7 +14,7 @@ function saveTodoList() {
 
     localStorage.setItem("todoList", todoList);
     localStorage.setItem("title", title);
-    localStorage.setItem("counter", count)
+    localStorage.setItem("counter", count);
 }
 
 // Function to load the todo list from localStorage
@@ -41,11 +41,6 @@ function loadTodoList() {
         document.querySelector("h1").textContent = title;
         //toggleTitleStyle(); // Apply italic style if needed
     }
-
-    const allElements = document.querySelectorAll('*');
-    allElements.forEach(element => {
-        element.classList.remove('deep-fried');
-    });
 }
 
 // Load the todo list from localStorage when the page loads
@@ -94,15 +89,12 @@ function toggleCompleted(checkbox) {
     if (checkbox.checked) {
         listItem.querySelector("span").classList.add("completed");
         ul.appendChild(listItem); // Move checked item to the bottom
-        var itemCheckedSound = new Audio('js/ding.mp3');
+        var itemCheckedSound = new Audio("js/ding.mp3");
         itemCheckedSound.volume = 0.2;
         itemCheckedSound.play();
     } else {
         listItem.querySelector("span").classList.remove("completed");
         ul.insertBefore(listItem, ul.firstChild); // Move unchecked item to the top
-        var itemUncheckedSound = new Audio('js/dong.mp3');
-        itemUncheckedSound.volume = 0.2;
-        itemUncheckedSound.play();
     }
     saveTodoList();
 }
@@ -120,13 +112,6 @@ function deleteTodo(button) {
 
         // Add the 'deleting' class to initiate the fade-out animation
         todoItem.classList.add("deleting");
-        var itemUncheckedSound = new Audio('js/delete.mp3');
-        itemUncheckedSound.volume = 0.2;
-        itemUncheckedSound.play();
-        const allElements = document.querySelectorAll('*');
-        allElements.forEach(element => {
-            element.classList.add('deep-fried');
-        });
 
         // After the animation finishes, remove the todo item from the list
         todoItem.addEventListener("animationend", function () {

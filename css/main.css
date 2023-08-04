@@ -21,25 +21,6 @@
     }
 }
 
-@keyframes deepFryAnimation {
-    0% {
-        transform: skew(0deg) rotate(0deg);
-        background-color: transparent;
-        filter: none;
-        text-shadow: none;
-    }
-    100% {
-        transform: skew(10deg) rotate(5deg);
-        background-color: #ff9933;
-        filter: contrast(200%) saturate(200%) hue-rotate(90deg);
-        text-shadow: 3px 3px 5px rgba(0, 0, 0, 0.5);
-    }
-}
-
-.deep-fried {
-    animation: deepFryAnimation 55s linear;
-}
-
 /* Removing the default contenteditable styles when editing h1 */
 h1[contenteditable="true"] {
     outline: none;
